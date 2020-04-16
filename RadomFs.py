@@ -5,7 +5,7 @@ from sklearn.model_selection import train_test_split
 from pandas import Series,DataFrame
 from sklearn.metrics import r2_score
 
-data = pd.read_csv("D://clean_data.csv",header = 0,encoding = "gbk")
+data = pd.read_csv("./clean_data.csv",header = 0,encoding = "gbk")
 #data = pd.read_csv("D://QJ.csv",header = 0,encoding = "gbk")
 #删除不作为输入特征的列
 #Order	Prcie	Unit	Date	Bedrooms	Halls	Toilet	Area	Towards	Floor	Arichi	Elevator	
@@ -69,21 +69,20 @@ accuracy=100-np.mean(mape)
 print('准确率：',round(accuracy,2),'%')
 
 #graphy
-#from sklearn.tree import export_graphviz
-#import pydot
-'''
+from sklearn.tree import export_graphviz
+import pydot
+
 rf.estimators_[:5]
 tree=rf.estimators_[5]
 export_graphviz(tree,
 				out_file='tree.dot',
 				feature_names=data_list,
-				roundsed=True,
 				precision=1)
 (graph,)=pydot.graph_from_dot_file('tree.dot')
 graph.write_png('tree.png')
 
 
-'''
+
 importances = list(rf.feature_importances_)
 
 feature_importances = [(data, round(importance, 9)) 
